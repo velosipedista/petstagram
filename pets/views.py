@@ -1,12 +1,15 @@
 from pets.models import Pet
 from django.shortcuts import render
 
-def pet_details(request, pk):
-    pass
+def pet_details(request, p):
+    pet = Pet.objects.get(pk=p)
+    context = {
+        'pet': pet
+    }
+    return render(request, 'pets/pet_detail.html', context)
 
 def list_pets(request):
-    all_pets = Pet.objects.all()
     context = {
-        'pets': all_pets,
+        'pets': Pet.objects.all(),
     }
     return render(request, 'pets/pet_list.html', context)
